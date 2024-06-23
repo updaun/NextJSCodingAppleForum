@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { connectDB } from '../../util/database'
+import ListItem from './ListItem.js'
 import DetailLink from './DetailLink'
 
 export default async function List() {
@@ -8,18 +9,8 @@ export default async function List() {
     let result = await db.collection('post').find().toArray()
 
     return (
-    <div className="list-bg">
-        {
-            result.map((post) => 
-                <div className="list-item" key={post._id}>
-                    <Link prefetch={false} href={`/detail/${post._id}`}>
-                        <h4>{post.title}</h4>
-                    </Link>
-                    {/* <DetailLink /> */}
-                    <Link href={`/edit/${post._id}`}>✏</Link>
-                    <p>{post.content}</p>
-                </div>
-            )}
-    </div>
+        <div className="list-bg">
+            <ListItem result={result}/>
+        </div>
     )
 }
