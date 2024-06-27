@@ -16,20 +16,19 @@ export default function ListItem({result}) {
                 },
                 body: JSON.stringify({_id: result[i]._id}),
               })
-              .then((r) => {
-                e.target.parentElement.style.opacity = 0
-                setTimeout(() => {
-                  e.target.parentElement.style.display = 'none'
-                }, 1000)
-                return r.json()
-              })
+              .then((response) => response.json())
               .then((result) => {
-                console.log(result)
+                if (result === 'delete') {
+                  e.target.parentElement.style.opacity = 0
+                  setTimeout(() => {
+                    e.target.parentElement.style.display = 'none'
+                  }, 1000)
+                }
               })
             }}>🗑</span>
             <p>1월 1일</p>
           </div>
-       ) }
+      )}
     </div>
   )
 }
