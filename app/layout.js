@@ -20,8 +20,10 @@ export default async function RootLayout({ children }) {
       <body className={inter.className}>
       <div className="navbar"> 
         <Link href="/" className="logo">Appleforum</Link> 
-        <Link href="/list">List</Link> 
-        <LoginBtn />
+        <Link href="/list">List</Link>
+        {/* 3항 연산자로 로그인 로그아웃 버튼 */}
+        {session?.user ? <Link href="/write">Write</Link> : null}
+        {session?.user ? <Link href="/api/auth/signout">Signout</Link> : <LoginBtn/>}
       </div>  
         {children}
       </body>
